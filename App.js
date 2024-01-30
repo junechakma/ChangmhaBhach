@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Questions from './assets/data/multipleQuestions';
 import ImageMultipleChoice from './src/components/ImageMultipleChoice/ImageMultipleChoice';
 import Header from './src/components/Header/Header';
-
+import FillInTheBlank from './src/components/FillInTheBlank/FillInTheBlank'
 export default function App() {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -50,7 +50,15 @@ export default function App() {
       <StatusBar style="auto" />
 
       <Header progress={currentQuestionIndex / Questions.length} lives={lives} />
-      <ImageMultipleChoice question={currentQuestion} onCorrect={onCorrect} onWrong={onWrong} />
+
+      {
+        currentQuestion.type === "IMAGE_MULTIPLE_CHOICE" && <ImageMultipleChoice question={currentQuestion} onCorrect={onCorrect} onWrong={onWrong} />
+      }
+      
+      {
+        currentQuestion.type === "FILL_IN_THE_BLANK" && <FillInTheBlank question={currentQuestion} onCorrect={onCorrect} onWrong={onWrong} />
+
+      }
     </View>
   );
 }
